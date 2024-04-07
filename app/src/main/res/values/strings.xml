@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MakaKumbha</string>
+    <string name="Hello">Hey there</string>
+    <string name="crate_account">Create an Account</string>
+    <string name="wellcome">Wellcome Back</string>
+    <string name="first_name">First Name</string>
+    <string name="Last_name">Last Name</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Hide_Password">Hide Password</string>
+    <string name="Show_Password">Show Password</string>
+    <string name="Terms_and_conditons">"By contuinuing you accept our Privacy Policy and Terms of use "</string>
+    <string name="Register">Resigter</string>
+    <string name="OR">" or "</string>
+    <string name="Terms_and_conditons_header">Term of Use</string>
+    <string name="Login">Login</string>
+    <string name="Test_Screen">Test_Screen</string>
+</resources>
