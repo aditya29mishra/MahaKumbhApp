@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.gms.google-services")
 
 }
 
@@ -63,8 +64,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation ("androidx.navigation:navigation-compose:2.7.7")
     implementation ("com.amplifyframework:aws-auth-cognito:2.14.11")
-
-
+    implementation(libs.firebase.auth)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

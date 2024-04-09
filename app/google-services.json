@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949801909359",
+    "project_id": "makakumbha",
+    "storage_bucket": "makakumbha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949801909359:android:67fa2540e45d54740c619a",
+        "android_client_info": {
+          "package_name": "com.scarry.makakumbha"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3WkAXBOcLv6q74z2ypcP4U7wq5Qy7y5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
