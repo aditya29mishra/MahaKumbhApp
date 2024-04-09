@@ -79,14 +79,17 @@ fun LoginScreen(navController: NavController) {
                 onClickAction = {
                     val userEmail = email.value
                     val userPassword = password.value
-                    // Use the email and password variables here
-                    AuthClass().loginUser(userEmail, userPassword) { user, error ->
-                        if (user != null) {
-                            // Login successful, navigate to the next screen
-                            navController.navigate(Screen.AuthTestScreen.route)
-                        } else {
-                            // Handle login error, show error message
+                    if (isAllDataFilled(userEmail, userPassword)) {
+                        AuthClass().loginUser(userEmail, userPassword) { user, error ->
+                            if (user != null) {
+                                // Login successful, navigate to the next screen
+                                navController.navigate(Screen.AuthTestScreen.route)
+                            } else {
+                                // Handle login error, show error message
+                            }
                         }
+                    } else {
+                        // Show error message that fields are empty
                     }
                 }
             )

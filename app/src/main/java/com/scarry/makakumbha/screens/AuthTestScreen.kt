@@ -21,6 +21,10 @@ import androidx.navigation.compose.rememberNavController
 import com.scarry.makakumbha.R
 import com.scarry.makakumbha.components.HeadingTextComponent
 import com.scarry.makakumbha.navigation.Screen
+import com.google.firebase.auth.FirebaseAuth
+
+// Initialize Firebase Authentication instance
+private val auth = FirebaseAuth.getInstance()
 
 @Composable
 fun AuthTestScreen(navController: NavController) {
@@ -38,7 +42,7 @@ fun AuthTestScreen(navController: NavController) {
             SignOutButton(onClick = {
                 // Handle sign out logic here
                 navController.navigate(Screen.LoginScreen.route)
-
+                auth.signOut()
             })
         }
     }

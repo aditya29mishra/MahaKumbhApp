@@ -104,16 +104,21 @@ fun SignUpScreen (navController: NavController){
                 onClickAction = {
                     val userEmail = email.value
                     val userPassword = password.value
-                    AuthClass().registerUser(userEmail, userPassword) { user, error ->
-                        if (user != null) {
-                            // Registration successful, navigate to the next screen
-                            navController.navigate(Screen.AuthTestScreen.route)
-                        } else {
-                            // Handle registration error, show error message
+                    if (isAllDataFilled(userEmail, userPassword)) {
+                        AuthClass().registerUser(userEmail, userPassword) { user, error ->
+                            if (user != null) {
+                                // Registration successful, navigate to the next screen
+                                navController.navigate(Screen.AuthTestScreen.route)
+                            } else {
+                                // Handle registration error, show error message
+                            }
                         }
+                    } else {
+                        // Show error message that fields are empty
                     }
                 }
             )
+
 
             Spacer(modifier = Modifier.heightIn(20.dp))
             DividerTextComponent()
