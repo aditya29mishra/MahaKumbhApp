@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -28,11 +30,19 @@ import com.scarry.makakumbha.components.MyTextFieldComponent
 import com.scarry.makakumbha.components.NormalTextComponent
 import com.scarry.makakumbha.components.PasswordTextFieldComponent
 import com.scarry.makakumbha.components.TwoButtonsWithAction
+import com.scarry.makakumbha.components.isAllDataFilled
 import com.scarry.makakumbha.navigation.Screen
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.scarry.makakumbha.firebase.AuthClass
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController) {
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -47,20 +57,37 @@ fun LoginScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.Email),
-                painterResource = painterResource(id = R.drawable.mail)
+                painterResource = painterResource(id = R.drawable.mail),
+                onValueChanged = { enteredEmail ->
+                    email.value = enteredEmail
+                }
             )
 
             PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.Password),
-                painterResource = painterResource(id = R.drawable.outline_lock_24)
+                painterResource = painterResource(id = R.drawable.outline_lock_24),
+                onPasswordChanged = { enteredPassword ->
+                    password.value = enteredPassword
+                }
             )
+
 
             Spacer(modifier = Modifier.heightIn(285.dp))
             LoginButtonComponent(
                 value = stringResource(id = R.string.Login),
                 iconResourceId = R.drawable.login,
                 onClickAction = {
-                    navController.navigate(Screen.AuthTestScreen.route)
+                    val userEmail = email.value
+                    val userPassword = password.value
+                    // Use the email and password variables here
+                    AuthClass().loginUser(userEmail, userPassword) { user, error ->
+                        if (user != null) {
+                            // Login successful, navigate to the next screen
+                            navController.navigate(Screen.AuthTestScreen.route)
+                        } else {
+                            // Handle login error, show error message
+                        }
+                    }
                 }
             )
             Spacer(modifier = Modifier.heightIn(20.dp))

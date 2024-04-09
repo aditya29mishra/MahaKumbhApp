@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -28,11 +30,19 @@ import com.scarry.makakumbha.components.MyTextFieldComponent
 import com.scarry.makakumbha.components.NormalTextComponent
 import com.scarry.makakumbha.components.PasswordTextFieldComponent
 import com.scarry.makakumbha.components.TwoButtonsWithAction
+import com.scarry.makakumbha.components.isAllDataFilled
+import com.scarry.makakumbha.firebase.AuthClass
 import com.scarry.makakumbha.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen (navController: NavController){
+
+    val email = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
+    val firstName = remember { mutableStateOf("") }
+    val lastName = remember { mutableStateOf("") }
+
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -49,22 +59,35 @@ fun SignUpScreen (navController: NavController){
             Spacer(modifier = Modifier.height(20.dp))
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.first_name),
-                painterResource(id = R.drawable.profile)
+                painterResource(id = R.drawable.profile),
+                onValueChanged = {enteredFirstName ->
+                    firstName.value = enteredFirstName
+                }
             )
 
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.Last_name),
-                painterResource = painterResource(id = R.drawable.profile)
+                painterResource = painterResource(id = R.drawable.profile),
+                onValueChanged = {enteredLastName ->
+                    lastName.value = enteredLastName
+
+                }
             )
 
             MyTextFieldComponent(
                 labelValue = stringResource(id = R.string.Email),
-                painterResource = painterResource(id = R.drawable.mail)
+                painterResource = painterResource(id = R.drawable.mail),
+                onValueChanged = { enteredEmail ->
+                    email.value = enteredEmail
+                }
             )
 
             PasswordTextFieldComponent(
                 labelValue = stringResource(id = R.string.Password),
-                painterResource = painterResource(id = R.drawable.outline_lock_24)
+                painterResource = painterResource(id = R.drawable.outline_lock_24),
+                onPasswordChanged = { enteredPassword ->
+                    password.value = enteredPassword
+                }
             )
 
             CheckboxComponent(
@@ -73,13 +96,25 @@ fun SignUpScreen (navController: NavController){
                     navController.navigate(Screen.TermsAndConditionsScreen.route)
                 }
             )
+
             Spacer(modifier = Modifier.heightIn(100.dp))
+
             ButtonComponent(
                 value = stringResource(id = R.string.Register),
-                    onClickAction = {
-                        navController.navigate(Screen.LoginScreen.route)
+                onClickAction = {
+                    val userEmail = email.value
+                    val userPassword = password.value
+                    AuthClass().registerUser(userEmail, userPassword) { user, error ->
+                        if (user != null) {
+                            // Registration successful, navigate to the next screen
+                            navController.navigate(Screen.AuthTestScreen.route)
+                        } else {
+                            // Handle registration error, show error message
+                        }
                     }
-                )
+                }
+            )
+
             Spacer(modifier = Modifier.heightIn(20.dp))
             DividerTextComponent()
             TwoButtonsWithAction(
@@ -93,7 +128,7 @@ fun SignUpScreen (navController: NavController){
                 }
             )
             ClickableLoginTextComponent(onTextSelected = {
-                navController.navigate(Screen.AuthTestScreen.route)
+                navController.navigate(Screen.LoginScreen.route)
             })
         }
     }

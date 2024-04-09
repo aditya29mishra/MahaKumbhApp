@@ -101,12 +101,14 @@ fun HeadingTextComponent(
     )
 }
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTextFieldComponent(labelValue: String, painterResource: Painter) {
-    val textValue = remember {
-        mutableStateOf("")
-    }
+fun MyTextFieldComponent(
+    labelValue: String,
+    painterResource: Painter,
+    onValueChanged: (String) -> Unit // Callback function to pass back the entered value
+) {
+    val textValue = remember { mutableStateOf("") }
 
     OutlinedTextField(
         modifier = Modifier
@@ -116,6 +118,7 @@ fun MyTextFieldComponent(labelValue: String, painterResource: Painter) {
         value = textValue.value,
         onValueChange = {
             textValue.value = it
+            onValueChanged(it) // Call the callback function with the entered value
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Black,
@@ -130,14 +133,13 @@ fun MyTextFieldComponent(labelValue: String, painterResource: Painter) {
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter){
-    val password = remember {
-        mutableStateOf("")
-    }
-
-    val passwordVisual = remember {
-        mutableStateOf(false)
-    }
+fun PasswordTextFieldComponent(
+    labelValue: String,
+    painterResource: Painter,
+    onPasswordChanged: (String) -> Unit // Callback function to pass back the entered password
+) {
+    val password = remember { mutableStateOf("") }
+    val passwordVisual = remember { mutableStateOf(false) }
 
     OutlinedTextField(
         modifier = Modifier
@@ -147,6 +149,7 @@ fun PasswordTextFieldComponent(labelValue: String, painterResource: Painter){
         value = password.value,
         onValueChange = {
             password.value = it
+            onPasswordChanged(it) // Call the callback function with the entered password
         },
         colors = TextFieldDefaults.outlinedTextFieldColors(
             focusedBorderColor = Color.Black,
@@ -449,4 +452,8 @@ fun TwoButtonsWithAction(
            )
        }
    }
+}
+
+fun isAllDataFilled(email: String, password: String): Boolean {
+    return email.isNotEmpty() && password.isNotEmpty()
 }

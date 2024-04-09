@@ -37,6 +37,7 @@ fun AuthTestScreen(navController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
             SignOutButton(onClick = {
                 // Handle sign out logic here
+                navController.navigate(Screen.LoginScreen.route)
 
             })
         }
