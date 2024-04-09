@@ -31,6 +31,7 @@ import com.scarry.makakumbha.components.NormalTextComponent
 import com.scarry.makakumbha.components.PasswordTextFieldComponent
 import com.scarry.makakumbha.components.TwoButtonsWithAction
 import com.scarry.makakumbha.components.isAllDataFilled
+import com.scarry.makakumbha.components.isNameDataFilled
 import com.scarry.makakumbha.firebase.AuthClass
 import com.scarry.makakumbha.navigation.Screen
 
@@ -104,16 +105,23 @@ fun SignUpScreen (navController: NavController){
                 onClickAction = {
                     val userEmail = email.value
                     val userPassword = password.value
-                    AuthClass().registerUser(userEmail, userPassword) { user, error ->
-                        if (user != null) {
-                            // Registration successful, navigate to the next screen
-                            navController.navigate(Screen.AuthTestScreen.route)
-                        } else {
-                            // Handle registration error, show error message
+                    val userFirstName = firstName.value
+                    val userLastName = lastName.value
+                    if (isAllDataFilled(userEmail, userPassword)&& isNameDataFilled(userFirstName,userLastName)) {
+                        AuthClass().registerUser(userEmail, userPassword) { user, error ->
+                            if (user != null) {
+                                // Registration successful, navigate to the next screen
+                                navController.navigate(Screen.AuthTestScreen.route)
+                            } else {
+                                // Handle registration error, show error message
+                            }
                         }
+                    } else {
+                        // Show error message that fields are empty
                     }
                 }
             )
+
 
             Spacer(modifier = Modifier.heightIn(20.dp))
             DividerTextComponent()

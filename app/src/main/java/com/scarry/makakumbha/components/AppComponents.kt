@@ -457,3 +457,6 @@ fun TwoButtonsWithAction(
 fun isAllDataFilled(email: String, password: String): Boolean {
     return email.isNotEmpty() && password.isNotEmpty()
 }
+fun isNameDataFilled(firstName: String, lastName: String): Boolean {
+    return firstName.isNotEmpty() && lastName.isNotEmpty()
+}
