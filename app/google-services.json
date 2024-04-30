@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "949801909359",
+    "firebase_url": "https://makakumbha-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "makakumbha",
+    "storage_bucket": "makakumbha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949801909359:android:67fa2540e45d54740c619a",
+        "android_client_info": {
+          "package_name": "com.scarry.makakumbha"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "949801909359-5grat4sbtjvphgsd1a1mkm487vmdd3gu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.scarry.makakumbha",
+            "certificate_hash": "45c1089d8579587e4ffc765f2e5a1e6a9039a1ec"
+          }
+        },
+        {
+          "client_id": "949801909359-mvlcd3rmjjdffb63eh12tlhjd4fahb6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3WkAXBOcLv6q74z2ypcP4U7wq5Qy7y5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "949801909359-mvlcd3rmjjdffb63eh12tlhjd4fahb6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
